@@ -13,7 +13,6 @@
   "main": "api/index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc --project tsconfig.json",
     "lint": "eslint \"api/**/*.{js,jsx,ts,tsx,json}\"",
     "lint:fix": "eslint --fix \"api/**/*.{js,jsx,ts,tsx,json}\""
   },
