@@ -43,7 +43,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   // fix line wrapping in the file
 
   const originalText: string = response.data;
-  const validLine = /^[a-zA-Z]+(?:;[^:=]+)?[:=]/;
+  const validLine = /^(?:[a-zA-Z]+(?:;[^:=]+)?[:=]| )/;
 
   const lines = originalText.split(/\r\n|\r|\n/);
   const fixedLines = [];
@@ -52,11 +52,11 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     if (validLine.test(line)) {
       fixedLines.push(line);
     } else {
-      fixedLines[fixedLines.length - 1] += line;
+      fixedLines.push(' ' + line);
     }
   }
 
-  const fixedText = fixedLines.join('\n');
+  const fixedText = fixedLines.join('\r\n');
 
   // parse file
 
