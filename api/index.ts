@@ -75,6 +75,9 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   }
   calendar.prodId(prodId);
 
+  calendar.name('MFPO Timetable');
+  calendar.description('Class and exam schedule from MFPO, processed to improve formatting.');
+
   calendar.events(
     vEvents.map(event => {
       let courseCode: string | undefined;
