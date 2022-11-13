@@ -28,9 +28,11 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 
   if (typeof link !== 'string') {
     res.status(400).send('Bad request: link is not a string');
+    return;
   }
   if (typeof filter !== 'string' && filter !== undefined) {
     res.status(400).send('Bad request: filter is not a string and is not empty');
+    return;
   }
 
   const filterRegex = filter === undefined ? null : new RegExp(filter as string, 'i');
