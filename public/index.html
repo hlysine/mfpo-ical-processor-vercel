@@ -4,10 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MFPO Calender Processor</title>
+    <title>MFPO Calendar Processor</title>
   </head>
   <body>
-    Usage:
+    <p>This is a cloud service that processes your MFPO calendar subscription for better formatting.</p>
+    <p>Usage:</p>
     <pre>https://mfpo.vercel.app/api/?filter=&lt;regex&gt;&link=&lt;MFPO link&gt;</pre>
+    <p>
+      <b>filter</b>: A regex that matches the course code of an event, useful when you only want to receive calendar
+      events for a specific course.
+    </p>
+    <p><b>link</b>: The calendar subscription link you obtained in MFPO.</p>
+    <p>
+      Use the link above instead of the one obtained in MFPO when subscribing to the calendar. Works across all calendar
+      apps that support iCal subscription.
+    </p>
   </body>
 </html>
