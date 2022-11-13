@@ -1,2 +1,5 @@
 /*
 !/api
+!package.json
+!yarn.lock
+!tsconfig.json
