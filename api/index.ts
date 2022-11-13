@@ -133,7 +133,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
           summary = `${courseCode} - ${event.summary}`;
         }
 
-        if (filterRegex && !filterRegex.test(summary)) {
+        if (filterRegex && !filterRegex.test(courseCode)) {
           return null;
         }
 
