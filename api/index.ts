@@ -91,7 +91,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       .map(event => {
         let courseCode: string | undefined;
         let sessionType: string | undefined;
-        const match = /^(\w{4}\d{4}|MED3-EVT) \(([\w- ()]+?)\)/.exec(event.summary);
+        const match = /^(\w{4}\d{4}|MED3-EVT) \(([\w ()-/\\]+?)\)/.exec(event.summary);
         if (match) {
           courseCode = match[1];
           sessionType = match[2];
