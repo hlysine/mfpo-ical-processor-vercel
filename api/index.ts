@@ -101,12 +101,12 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       .map(event => {
         let courseCode: string | undefined;
         let sessionType: string | undefined;
-        const match = /^(\w{4}\d{4}|MED3-EVT) \(([\w ()-/\\]+?)\)/.exec(event.summary);
+        const match = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT) \(([\w ()-/\\]+?)\)/.exec(event.summary);
         if (match) {
           courseCode = match[1];
           sessionType = match[2];
         } else if (event.summary) {
-          const courseCodeMatch = /^(\w{4}\d{4}|MED3-EVT)/.exec(event.summary);
+          const courseCodeMatch = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT)/.exec(event.summary);
           if (courseCodeMatch) {
             courseCode = courseCodeMatch[1];
           }
@@ -120,6 +120,8 @@ export default async (req: VercelRequest, res: VercelResponse) => {
             sessionType = 'Self learning';
           } else if (event.summary.toLowerCase().includes('(visit)')) {
             sessionType = 'Visit';
+          } else if (event.summary.toLowerCase().includes('(lecture)')) {
+            sessionType = 'Lecture';
           }
         }
 
