@@ -149,6 +149,11 @@ export default async (req: VercelRequest, res: VercelResponse) => {
           return null;
         }
 
+        // for full day events, the end time should exclusive
+        if (event.start.getHours() === 0 && event.end.getHours() === 0) {
+          event.end.setDate(event.end.getDate() + 1);
+        }
+
         return {
           id: event.uid,
           class: event.class.trim() as ICalEventClass,
