@@ -7,11 +7,21 @@ const COURSE_CODE_MAP: { [k: string]: string | undefined } = {
   MEDU3300: 'Human Structure',
   MEDU3400: 'Human Function',
   MEDU3500: 'Doctor & Patient',
-  MEDU3160: 'Resilience Building',
+  MEDU3160: 'Resilience',
   MEDU3700: 'Bioethics',
   MEDU3600: 'Pathology',
   MEDU3520: 'Clinical Anatomy',
   'MED3-EVT': 'MED3 Event',
+  MEDU3110: 'Med',
+  MEDU3200: 'Skills Module',
+  MEDU3210: 'Sur',
+  MEDU3310: 'ACP',
+  MEDU3320: 'Chem Path',
+  MEDU3330: 'Mic-bi',
+  MEDU3340: 'Communication',
+  MEDU3800: 'Bioethics',
+  MEDU3360: 'Resilience',
+  'MED4-EVT': 'MED4 Event',
 };
 
 function isEvent(obj: ical.CalendarComponent): obj is ical.VEvent {
