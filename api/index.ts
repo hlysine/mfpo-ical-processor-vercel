@@ -150,7 +150,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
         }
 
         // for full day events, the end time should exclusive
-        if (event.start.getHours() === 0 && event.end.getHours() === 0) {
+        if (event.start.getUTCHours() === 16 && event.end.getUTCHours() === 16) {
           event.end.setDate(event.end.getDate() + 1);
         }
 
