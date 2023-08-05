@@ -7,8 +7,10 @@
     <title>MFPO Calendar Processor</title>
   </head>
   <body>
+    <h1>MFPO Calendar Processor</h1>
     <p>This is a cloud service that processes your MFPO calendar subscription for better formatting.</p>
-    <p>Usage:</p>
+    <hr />
+    <h2>General Usage</h2>
     <pre>https://mfpo.vercel.app/api/?filter=&lt;regex&gt;&link=&lt;MFPO link&gt;</pre>
     <p>
       <b>filter</b>: A regex that matches the course code of an event, useful when you only want to receive calendar
@@ -19,5 +21,38 @@
       Use the link above instead of the one obtained in MFPO when subscribing to the calendar. Works across all calendar
       apps that support iCal subscription.
     </p>
+    <hr />
+    <h2>Pre-made links</h2>
+    <h3>Year 4 Medicine</h3>
+    <p><b>Master link: </b><code>https://mfpo.vercel.app/api/?link=&lt;MFPO link&gt;</code></p>
+    <blockquote>
+      Use the master link if you want to import all events from MFPO to your calendar. Replace
+      <code>&lt;MFPO link&gt;</code> with your MFPO calendar subscription link.<br />
+      Note that you can only set a single color for all the imported events if you only use this link.
+    </blockquote>
+    <br />
+    <p><b>ACP link: </b><code>https://mfpo.vercel.app/api/?filter=MEDU3310&link=&lt;MFPO link&gt;</code></p>
+    <p><b>Chem Path link: </b><code>https://mfpo.vercel.app/api/?filter=MEDU3320&link=&lt;MFPO link&gt;</code></p>
+    <p><b>Mic-bi link: </b><code>https://mfpo.vercel.app/api/?filter=MEDU3330&link=&lt;MFPO link&gt;</code></p>
+    <p>
+      <b>Med link: </b
+      ><code>https://mfpo.vercel.app/api?filter=MEDU3110%7CMED%5Cd-%5BA-Z%26%5D%7B1%2C5%7D&link=&lt;MFPO link&gt;</code>
+    </p>
+    <p>
+      <b>Sur link: </b
+      ><code>https://mfpo.vercel.app/api?filter=MEDU3210%7CSUR%5Cd-%5BA-Z%26%5D%7B1%2C5%7D&link=&lt;MFPO link&gt;</code>
+    </p>
+    <p><b>Bioethics link: </b><code>https://mfpo.vercel.app/api/?filter=MEDU3800&link=&lt;MFPO link&gt;</code></p>
+    <p>
+      <b>Link for all remaining courses: </b
+      ><code
+        >https://mfpo.vercel.app/api?filter=%5E%28%3F%21MEDU3110%7CMEDU3210%7CMEDU3310%7CMEDU3320%7CMEDU3330%7CMEDU3800%7C%28%3F%3AMED%7CSUR%29%5Cd-%5BA-Z%26%5D%7B1%2C5%7D%29&link=&lt;MFPO
+        link&gt;</code
+      >
+    </p>
+    <blockquote>
+      Import these links one by one into your calendar app if you want to color-code your events. Replace
+      <code>&lt;MFPO link&gt;</code> with your MFPO calendar subscription link.
+    </blockquote>
   </body>
 </html>
