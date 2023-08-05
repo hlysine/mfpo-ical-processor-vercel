@@ -29,7 +29,7 @@ function getCourseName(courseCode: string) {
   if (courseName) {
     return courseName;
   }
-  const match = /^(MED|SUR)\d-([A-Z&]{,5})$/.exec(courseCode);
+  const match = /^(MED|SUR)\d-([A-Z&]{1,5})$/.exec(courseCode);
   if (match) {
     return `${match[2]} ${match[1] === 'MED' ? 'Med' : 'Sur'}`;
   }
@@ -113,14 +113,14 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       .map(event => {
         let courseCode: string | undefined;
         let sessionType: string | undefined;
-        const match = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT|(?:MED|SUR)\d-[A-Z&]{,5}) \(([\w ()-/\\]+?)\)/.exec(
+        const match = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT|(?:MED|SUR)\d-[A-Z&]{1,5}) \(([\w ()-/\\]+?)\)/.exec(
           event.summary
         );
         if (match) {
           courseCode = match[1];
           sessionType = match[2];
         } else if (event.summary) {
-          const courseCodeMatch = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT|(?:MED|SUR)\d-[A-Z&]{,5})/.exec(event.summary);
+          const courseCodeMatch = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT|(?:MED|SUR)\d-[A-Z&]{1,5})/.exec(event.summary);
           if (courseCodeMatch) {
             courseCode = courseCodeMatch[1];
           }
