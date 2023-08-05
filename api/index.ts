@@ -24,6 +24,18 @@ const COURSE_CODE_MAP: { [k: string]: string | undefined } = {
   'MED4-EVT': 'MED4 Event',
 };
 
+function getCourseName(courseCode: string) {
+  const courseName = COURSE_CODE_MAP[courseCode];
+  if (courseName) {
+    return courseName;
+  }
+  const match = /^(MED|SUR)\d-([A-Z&]{,5})$/.exec(courseCode);
+  if (match) {
+    return `${match[2]} ${match[1] === 'MED' ? 'Med' : 'Sur'}`;
+  }
+  return courseCode;
+}
+
 function isEvent(obj: ical.CalendarComponent): obj is ical.VEvent {
   return obj.type === 'VEVENT';
 }
@@ -101,12 +113,14 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       .map(event => {
         let courseCode: string | undefined;
         let sessionType: string | undefined;
-        const match = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT) \(([\w ()-/\\]+?)\)/.exec(event.summary);
+        const match = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT|(?:MED|SUR)\d-[A-Z&]{,5}) \(([\w ()-/\\]+?)\)/.exec(
+          event.summary
+        );
         if (match) {
           courseCode = match[1];
           sessionType = match[2];
         } else if (event.summary) {
-          const courseCodeMatch = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT)/.exec(event.summary);
+          const courseCodeMatch = /^(\w{4}\d{4}|MED3-EVT|MED4-EVT|(?:MED|SUR)\d-[A-Z&]{,5})/.exec(event.summary);
           if (courseCodeMatch) {
             courseCode = courseCodeMatch[1];
           }
@@ -122,6 +136,10 @@ export default async (req: VercelRequest, res: VercelResponse) => {
             sessionType = 'Visit';
           } else if (event.summary.toLowerCase().includes('(lecture)')) {
             sessionType = 'Lecture';
+          } else if (event.summary.toLowerCase().includes('(ward rounds)')) {
+            sessionType = 'Ward rounds';
+          } else if (event.summary.toLowerCase().includes('(attachment)')) {
+            sessionType = 'Attachment';
           }
         }
 
@@ -136,9 +154,9 @@ export default async (req: VercelRequest, res: VercelResponse) => {
         let summary;
         if (courseCode) {
           if (sessionType) {
-            summary = `${COURSE_CODE_MAP[courseCode] ?? courseCode} - ${sessionType}`;
+            summary = `${getCourseName(courseCode)} - ${sessionType}`;
           } else {
-            summary = `${COURSE_CODE_MAP[courseCode] ?? courseCode} - UNKNOWN`;
+            summary = `${getCourseName(courseCode)} - UNKNOWN`;
           }
         } else {
           courseCode = 'UNKNOWN';
